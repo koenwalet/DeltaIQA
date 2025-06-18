@@ -16,6 +16,8 @@
 - Scikit-image 0.25.2
 
 ## Dataset
+The LDCTIQAC 2023 dataset used for training, testing and internal validation is available [here](https://ldctiqac2023.grand-challenge.org).  
+Images from the [Cancer Imaging Archive](https://www.cancerimagingarchive.net/collection/ldct-and-projection-data/), using scores from the Leiden University Medical Centre, were used for external validation. 
 
 ## Performance of the model
 On the internal validation set, the overall accuracy is 0.67. 
