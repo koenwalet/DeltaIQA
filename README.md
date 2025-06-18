@@ -1,5 +1,5 @@
 # Delta-IQA: A Convolutional Neural Network for Automatic Quality Assessment of CT Images
-
+Introduction ...
 ## Model Architecture 
 ![Diagram](Images/Framework.png)
 
@@ -24,4 +24,4 @@ On the internal validation set, the overall accuracy is 0.67.
 
 
 ## Credits
-Lars Jongsma, Koen Walet, Joey Mulder & Thomas Dijkstra (2025).
+Created by: Lars Jongsma, Koen Walet, Joey Mulder & Thomas Dijkstra (2025).
