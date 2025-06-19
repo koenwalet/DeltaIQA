@@ -58,18 +58,30 @@ class CTQualityDataset:
         fuzzy[upper] = weight_upper
         fuzzy[lower] = weight_lower
         return fuzzy.astype(np.float32)
+    
+    def crop_image(self, image):
+        """Crops images to 1:1 aspect ratio"""
+
+        h, w = image.shape[:2]
+        start_x = (w-h)//2
+        end_x = start_x + h
+        cropped_image = image[:, start_x:end_x]
+        return cropped_image
 
     def load_tif_image(self, filepath):
         """Load and preprocess TIF image"""
 
         # Load TIF file
-        image = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
+        image_raw = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
         
         # Convert to float32 for processing
-        image = image.astype(np.float32)
+        image_raw = image_raw.astype(np.float32)
+
+        # Crop image
+        image_cropped = self.crop_image(image_raw)
 
         # Resize image
-        image = cv2.resize(image, self.target_size)
+        image = cv2.resize(image_cropped, self.target_size)
 
         # Ensure image is grayscale
         if len(image.shape) > 2:
@@ -80,6 +92,7 @@ class CTQualityDataset:
 
         return image
     
+
     def load_entire_dataset(self):
         images = []
         labels = []
@@ -88,7 +101,7 @@ class CTQualityDataset:
             for index, row in self.labels_df.iterrows():
                 filename = row["filename"]
                 label = row["class"]
-                
+
                 filepath = os.path.join(self.data_dir, filename)
 
                 image = self.load_tif_image(filepath)
@@ -98,7 +111,7 @@ class CTQualityDataset:
 
             return np.array(images), np.array(labels)
         else: 
-            for filename in os.listdir(self.data_dir):
+            for filename in sorted(os.listdir(self.data_dir)):
                 filepath = os.path.join(self.data_dir, filename)
                 
                 image = self.load_tif_image(filepath)
@@ -111,7 +124,7 @@ class CTQualityDataset:
 
         # Display the image
         plt.imshow(images[index, :, :, :], cmap='gray')
-        plt.title(f"Image {index}")
+        plt.title(f"Image: {index}")
         plt.show()
 
 # %%
@@ -129,4 +142,3 @@ if __name__ == "__main__":
     dataset.test_load_and_display_image(images=images, index=0)
 
     print(dataset.labels_df)
-# %%
