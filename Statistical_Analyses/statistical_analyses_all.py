@@ -6,7 +6,7 @@ import pandas as pd
 from scipy.stats import kendalltau, spearmanr, pearsonr
 import pingouin as pingouin
 from Input.stacked_tiff import load_stacked_tiff
-from AlexNet_v15_fuzzylabels_b128_LR1e5_WD1e3 import AlexNet
+from model import AlexNet
 
 #%% Statistical analyses: Confusion matrix, accuracy, precision and recall 
 class Statistical_analysis_confusion_matrix_accuracy_precision_recall:
