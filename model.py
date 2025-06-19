@@ -6,7 +6,7 @@ import numpy as np
 from Input.model_input_fuzzy import CTQualityDataset
 from matplotlib import pyplot as plt
 import pickle
-from data_augmentation import DataAugmentatie
+from Data_Augmentation.data_augmentation import DataAugmentatie
 
 # %% Class definition
 
