@@ -88,7 +88,7 @@ class CTQualityDataset:
             for index, row in self.labels_df.iterrows():
                 filename = row["filename"]
                 label = row["class"]
-
+                
                 filepath = os.path.join(self.data_dir, filename)
 
                 image = self.load_tif_image(filepath)
@@ -111,7 +111,7 @@ class CTQualityDataset:
 
         # Display the image
         plt.imshow(images[index, :, :, :], cmap='gray')
-        plt.title(f"Image: {self.labels_df.iloc[index]['filename']}")
+        plt.title(f"Image {index}")
         plt.show()
 
 # %%
