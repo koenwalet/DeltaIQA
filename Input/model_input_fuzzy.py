@@ -37,6 +37,8 @@ class CTQualityDataset:
         self.labels_df["class"] = self.labels_df["score"].apply(self.make_fuzzy_label)
 
     def make_fuzzy_label(self, value, num_classes=5):
+        """Converts continuous labels to fuzzy labels"""
+        
         if value <= 0:
             fuzzy = np.zeros(num_classes, dtype=np.float32)
             fuzzy[0] = 1.0
