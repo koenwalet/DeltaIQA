@@ -53,33 +53,34 @@ def make_gradcam_heatmap(model, img, last_conv_layer_name, pred_index=None):
     return tf.image.resize(heatmap.numpy(), (512, 512))
 
 # %%
-model = AlexNet()
-model.load_weights("C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Code/AlexNet_v15_fuzzylabels_b128_LR1e-5_WD1e-3.weights.h5")
+if __name__ == "__main__":
+    model = AlexNet()
+    model.load_weights("C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Code/AlexNet_v15_fuzzylabels_b128_LR1e-5_WD1e-3.weights.h5")
+        
+    val_data_dir = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/Abdomen/images/"
+    val_labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/Abdomen/val_abdomen_cia.json"
     
-val_data_dir = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/Abdomen/images/"
-val_labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/Abdomen/val_abdomen_cia.json"
-
-dataset = CTQualityDataset(data_dir=val_data_dir, labels_file=val_labels_file)
-val_images, val_labels = dataset.load_entire_dataset()
-
-#%% 
-index_img = 3
-
-single_img = val_images[index_img]
-single_img_batch = np.expand_dims(single_img, axis=0)
-
-last_conv_layer_name = "conv5"
-
-model.layers[-1].activation = None
-rad_scores = np.argmax(val_labels, axis=1)
-mod_scores = np.argmax(model.predict(val_images, batch_size=128), axis=1)
-heatmap = make_gradcam_heatmap(model, single_img_batch, last_conv_layer_name)
-
-fig, ax = plt.subplots(figsize=(10, 10))
-ax.matshow(single_img, cmap="grey")
-ax.matshow(heatmap, cmap="jet", alpha=0.4)
-ax.axis("off")
-plt.title(f"CT + Saliency Overlay (Rad score={rad_scores[index_img]}, Mod score={mod_scores[index_img]})")
-plt.tight_layout()
-plt.show()
+    dataset = CTQualityDataset(data_dir=val_data_dir, labels_file=val_labels_file)
+    val_images, val_labels = dataset.load_entire_dataset()
+    
+    #%% 
+    index_img = 3
+    
+    single_img = val_images[index_img]
+    single_img_batch = np.expand_dims(single_img, axis=0)
+    
+    last_conv_layer_name = "conv5"
+    
+    model.layers[-1].activation = None
+    rad_scores = np.argmax(val_labels, axis=1)
+    mod_scores = np.argmax(model.predict(val_images, batch_size=128), axis=1)
+    heatmap = make_gradcam_heatmap(model, single_img_batch, last_conv_layer_name)
+    
+    fig, ax = plt.subplots(figsize=(10, 10))
+    ax.matshow(single_img, cmap="grey")
+    ax.matshow(heatmap, cmap="jet", alpha=0.4)
+    ax.axis("off")
+    plt.title(f"CT + Saliency Overlay (Rad score={rad_scores[index_img]}, Mod score={mod_scores[index_img]})")
+    plt.tight_layout()
+    plt.show()
 # %%
