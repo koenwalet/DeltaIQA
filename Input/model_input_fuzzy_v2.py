@@ -98,8 +98,8 @@ class CTQualityDataset:
 
             return np.array(images), np.array(labels)
         else: 
-            for filename in os.listdir(data_dir):
-                filepath = os.path.join(data_dir, filename)
+            for filename in os.listdir(self.data_dir):
+                filepath = os.path.join(self.data_dir, filename)
                 
                 image = self.load_tif_image(filepath)
                 images.append(image)
