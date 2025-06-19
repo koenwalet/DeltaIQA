@@ -8,8 +8,8 @@ import json
 import os 
 from skimage.transform import rotate, warp, EuclideanTransform, AffineTransform
 
-#%%
-# Data inladen
+#%% Load data
+
 
 class data_inladen_dataframe:
     def __init__(self, data_path, labels_file, target_size=(512,512,)):
@@ -29,6 +29,8 @@ class data_inladen_dataframe:
         self.labels_dataframe['class'] = self.labels_dataframe['score'].apply(self.make_fuzzy_label)
 
     def make_fuzzy_label(self, value, num_classes=5):
+        """Converts continuous labels to fuzzy labels"""
+        
         if value <= 0:
             fuzzy = np.zeros(num_classes, dtype=np.float32)
             fuzzy[0] = 1.0
@@ -277,23 +279,6 @@ if __name__ == "__main__":
     # augmenteren.visualize_augmentations(images[0], labels[0])
 
 
-
-#%%
-# Extra zooi: 
-
-# Voor elke originele image augmenteren zonder batch idee voor geheugen verminderen 
-        # for i, (image, label) in enumerate(zip(images, labels)):
-        #     # Progressie indicator
-        #     if i % 100 == 0: 
-        #         print(f"Augmenteren image {i}/{len(images)}")
-
-        #     # Voer de augmentaties uit
-        #     aug_images = self.augment_single_image(image, number_augmentations)
-
-        #     # Voeg geaugmenteerde images toe aan dataset met bijbehorende label
-        #     for aug_image in aug_images:
-        #         augmented_images.append(aug_image)
-        #         augmented_labels.append(label)
 
 #           # Progressie indicator
                 # if i % 100 == 0: 
