@@ -3,7 +3,7 @@ import tensorflow as tf
 from keras.models import Sequential
 from tensorflow import keras
 import numpy as np
-from model_input_fuzzy import CTQualityDataset
+from Input.model_input_fuzzy import CTQualityDataset
 from matplotlib import pyplot as plt
 import pickle
 from data_augmentation import DataAugmentatie
