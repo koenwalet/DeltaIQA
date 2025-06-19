@@ -63,5 +63,13 @@ def load_stacked_tiff(data_dir, labels_file):
     return np.array(images), np.array(labels)
 # %%
 if __name__ == "__main__":
-    images, labels = load_stacked_tiff(data_dir, labels_file)
+        data_dir_0 = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAC2023_val/LDCTIQAG2023_val/valid_0.tif"
+        data_dir_1 = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAC2023_val/LDCTIQAG2023_val/valid_1.tif"
+        labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAC2023_val/LDCTIQAG2023_val/ground-truth.json"
+
+        images_0, labels_0 = load_stacked_tiff(data_dir_0, labels_file)
+        images_1, labels_1 = load_stacked_tiff(data_dir_1, labels_file)
+
+        images = np.concatenate([images_0, images_1], axis=0)
+        labels = np.concatenate([labels_0, labels_1], axis=0)
 # %%
