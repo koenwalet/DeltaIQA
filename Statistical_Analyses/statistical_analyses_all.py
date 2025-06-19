@@ -372,7 +372,7 @@ class weighted_cohens_kappa:
         """Analysis of Weighted Cohen's Kappa"""
         
         print("\n=== Weighted Cohen's Kappa Analyse ===")
-        print(f"Vergelijking tussen {rater1_name} en {rater2_name}")
+        print(f"Comparison between {rater1_name} and {rater2_name}")
         print()
 
         kappa_results = self.calculate_weighted_cohens_kappa(rad_scores, mod_scores, weights='quadratic')
@@ -415,7 +415,7 @@ class weighted_cohens_kappa:
             'lower_bound': kappa_score - margin_error,
             'upper_bound': kappa_score + margin_error,
             'margin_error': margin_error,
-            'note': "Dit is een grove benadering"
+            'note': "This is a rough estimation"
         }
 
         return ci_results
