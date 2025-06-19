@@ -1,5 +1,6 @@
 # Delta-IQA: A Convolutional Neural Network for Automatic Quality Assessment of CT Images
-Introduction ...
+Introduction... 
+
 ## Model Architecture 
 ![Diagram](Images/Framework.png)
 
