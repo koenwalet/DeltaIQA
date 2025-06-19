@@ -279,25 +279,25 @@ class Statistical_analysis_SROCC_KROCC_PLCC:
         # SROCC
         srocc_results = self.calculate_srocc(rad_scores, mod_scores)
         print(f"SROCC: {srocc_results['coefficient']:.4f}, p-value: {srocc_results['p_value']:.4f}")
-        print(f"Uitleg: {srocc_results['description']}")
+        print(f"Explanation: {srocc_results['description']}")
         print()
 
         # KROCC
         krocc_results = self.calculate_krocc(rad_scores, mod_scores)
         print(f"KROCC: {krocc_results['coefficient']:.4f}, p-value: {krocc_results['p_value']:.4f}")
-        print(f"Uitleg: {krocc_results['description']}")
+        print(f"Explanation: {krocc_results['description']}")
         print()
 
         # PLCC
         plcc_results = self.calculate_plcc(rad_scores, mod_scores)
         print(f"PLCC: {plcc_results['coefficient']:.4f}, p-value: {plcc_results['p_value']:.4f}")
-        print(f"Uitleg: {plcc_results['description']}")
+        print(f"Explanation: {plcc_results['description']}")
         print()
 
         # Overall
         overall_results = self.calculate_overall_correlation()
         print(f"Overall Correlation: {overall_results['coefficient']:.4f}")
-        print(f"Uitleg: {overall_results['description']}")
+        print(f"Explanation: {overall_results['description']}")
         print()
 
         return self.results
