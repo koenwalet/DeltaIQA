@@ -1,5 +1,4 @@
-#%% 
-# Import packages
+#%%  Imports
 import numpy as np
 from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, cohen_kappa_score
 import matplotlib.pyplot as plt
@@ -9,20 +8,20 @@ import pingouin as pingouin
 from STACKED_TIFF import load_stacked_tiff
 from AlexNet_v15_fuzzylabels_b128_LR1e5_WD1e3 import AlexNet
 
-#%%
-# Statische analyse: Confusion matrix, accuracy, precision en recall 
-
+#%% Statistical analyses: Confusion matrix, accuracy, precision and recall 
 class Statistical_analysis_confusion_matrix_accuracy_precision_recall:
     def __init__(self, score_categories=None, labels_scores=None):
-        # Initialiseer de score-categorien en de score-labels
+        """Initialise the score-categories and score-labels of the dataset""" 
+        
         self.score_categories = score_categories or ['Poor: 0', 'Fair: 1', 'Good: 2', 'Very Good: 3', 'Excellent: 4']
         self.labels_scores = labels_scores or [0, 1, 2, 3, 4]
 
         self.confusion_matrix = None
-        self.results={}         # Dictionary voor de resultaten
-
-    # Confusion matrix van model 
+        self.results={}         
+ 
     def create_confusion_matrix(self, rad_scores, mod_scores, normalize=None, figsize=(10,8)):
+        """Create a confusion matrix of the model performance on the dataset"""
+        
         cm = confusion_matrix(rad_scores, mod_scores, labels=self.labels_scores, normalize=normalize)
 
         disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=self.score_categories)
@@ -38,6 +37,8 @@ class Statistical_analysis_confusion_matrix_accuracy_precision_recall:
         return cm
 
     def get_confusion_matrix_dataframe(self):
+        """Convert confusion matrix to dataframe"""
+        
         if self.confusion_matrix is None:        # Zie bij init, create_confusion_matrix functie nog niet gerund.
             raise ValueError("Eerst Confusion Matrix maken met -creat_confusion_matrix()- functie")
 
@@ -51,7 +52,8 @@ class Statistical_analysis_confusion_matrix_accuracy_precision_recall:
     
     # Accuracy berekenen
     def calculate_accuracy(self, rad_scores, mod_scores):
-        # Exacte Accuracy, dit wordt een percentage exact juiste voorspellingen
+        """Calculates the total accuracy of the model on the data"""
+        
         exact_accuracy = accuracy_score(rad_scores, mod_scores)
         
         accuracy_results ={
@@ -64,7 +66,7 @@ class Statistical_analysis_confusion_matrix_accuracy_precision_recall:
     
     # Precision berekenen, ook wel de positief voorspellende waarde
     def calculate_precision(self, rad_scores, mod_scores):
-        # Macro precision: is de gemiddelde van alle categorien
+        """Calculates macro-, micro- and weighted precision of the model on"""
         macro_precision = precision_score(rad_scores, 
                                         mod_scores, 
                                         labels=self.labels_scores,
