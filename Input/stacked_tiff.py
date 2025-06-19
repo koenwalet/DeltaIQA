@@ -8,10 +8,12 @@ import matplotlib.pyplot as plt
 import os
 import tifffile as tiff
 
-# %%
+# %% Load data
+
 data_dir = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAC2023_val/LDCTIQAG2023_val/valid_1.tif"
 labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAC2023_val/LDCTIQAG2023_val/ground-truth.json"
 
+# Make fuzzy labels from continuous score
 def make_fuzzy_label(value, num_classes=5):
         """Convert labels to fuzzy labels"""
 
@@ -34,6 +36,7 @@ def make_fuzzy_label(value, num_classes=5):
         fuzzy[lower] = weight_lower
         return fuzzy.astype(np.float32)
 
+# Convert stacked tiff to 
 def load_stacked_tiff(data_dir, labels_file):
     stack = tiff.imread(data_dir)
     
