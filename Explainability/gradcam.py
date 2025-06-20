@@ -4,7 +4,7 @@ from tensorflow import keras
 import numpy as np
 from Input.model_input_fuzzy import CTQualityDataset
 from matplotlib import pyplot as plt
-from model import AlexNet
+from Model.model import AlexNet
 
 # %%
 def make_gradcam_heatmap(model, img, last_conv_layer_name, pred_index=None):
