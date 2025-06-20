@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+
 # %%
 class CTQualityDataset:
     def __init__(self, data_dir, labels_file=None, target_size=(512, 512)):
