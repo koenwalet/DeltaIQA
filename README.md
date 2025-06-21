@@ -1,6 +1,10 @@
 # Delta-IQA: A Convolutional Neural Network for Automatic Quality Assessment of CT Images
-Introduction... 
+Welcome to the GitHub repository for the Delta-IQA (Delta Image Quality Assessment) model. This model is a Convolutional Neural Network, created for the purpose of automatically assessing the image quality of Computed Tomography scans. 
 
+Traditionally, image quality assessment involves scanning physical test objects (phantoms) to measure image properties such as noise, contrast, and resolution. Delta-IQA replaces this tideous, time-consuming, manual approach with a continuous insight into image quality, performed on actual patient CT images. The scoring is based upon a Likert scale from 0-4, and is designed to represent the assessability according to radiologists, not to calculate image properties that are seperate from this assessibility.
+
+
+This model is created in request from the Leiden University Medical Centre.
 ## Model Architecture 
 ![Diagram](Images/Framework.png)
 
@@ -23,6 +27,19 @@ Images from the [Cancer Imaging Archive](https://www.cancerimagingarchive.net/co
 ## Performance of the model
 On the internal validation set, the overall accuracy is 0.67. 
 
+## Intended Use
+- Intended to be used as an automated Image Quality Assessment method for CT images from real patients, in a research context.
+- Intended to be used by clinical professionals working with CT scanners, clinical physicists performing quality assurance and researchers.
+- Not suitable for non-CT images (e.g. PET or MRI), non-transverse or axial scans, different patient groups without prior local validation, or diagnostic applications.
+
+## Ethical Considerations
+- No personal information was used, and all data were acquired from open-use data sources.
+- Before implementation in clinical practice, severe testing needs to be done to ensure the model prediction does not result in wrongful consequences for CT settings, which could potentially be harmful for the patient.
+
+## Caveats and Recommendations
+- Scoring from the internal and external validation sets was not compared. Further research needs to study inter-observer variability. 
+- Only a small portion of CT protocols were covered in the dataset: extensive testing on a larger, heterogeneous dataset needs to be conducted.
+- This model is not ready for integration into a clinical pipeline, as no implementable software package has been constructed.
 
 ## Credits
 Created by: Lars Jongsma, Koen Walet, Joey Mulder & Thomas Dijkstra (2025).
