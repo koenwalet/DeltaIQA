@@ -25,7 +25,7 @@ The LDCTIQAC 2023 dataset used for training, testing and internal validation is 
 Images from the [Cancer Imaging Archive](https://www.cancerimagingarchive.net/collection/ldct-and-projection-data/), using scores from the Leiden University Medical Centre, were used for external validation. 
 
 ## Performance of the model
-On the internal validation set, the overall accuracy is 0.67. 
+On the internal validation set, the overall accuracy is 0.64. 
 
 ## Intended Use
 - Intended to be used as an automated Image Quality Assessment method for CT images from real patients, in a research context.
