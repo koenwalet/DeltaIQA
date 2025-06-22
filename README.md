@@ -1,7 +1,7 @@
 # Delta-IQA: A Convolutional Neural Network for Automatic Quality Assessment of CT Images
 Welcome to the GitHub repository for the Delta-IQA (Delta Image Quality Assessment) model. This model is a Convolutional Neural Network, created for the purpose of automatically assessing the image quality of Computed Tomography scans. 
 
-Traditionally, image quality assessment involves scanning physical test objects (phantoms) to measure image properties such as noise, contrast, and resolution. Delta-IQA replaces this tideous, time-consuming, manual approach with a continuous insight into image quality, performed on actual patient CT images. The scoring is based upon a Likert scale scoring from 0-4, and is designed to represent the assessability according to radiologists, not to calculate image properties that are seperate from this assessibility.
+Traditionally, image quality assessment involves scanning physical test objects (phantoms) to measure image properties such as noise, contrast, and resolution. Delta-IQA replaces this tideous, time-consuming, manual approach with a continuous insight into image quality, performed on actual patient CT images. The scoring is based upon a Likert scale scoring from 0-4 from radiologists, and is designed to represent the ability for radiologists to properly assess an image, not to calculate image properties that are seperate from this ability.
 
 
 This model is created in request from the Leiden University Medical Centre.
