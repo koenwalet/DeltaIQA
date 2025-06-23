@@ -30,7 +30,7 @@ On the internal validation set, the overall accuracy is 0.64.
 ## Intended Use
 - Intended to be used as an automated Image Quality Assessment method for CT images from real patients, in a research context.
 - Intended to be used by clinical professionals working with CT scanners, clinical physicists performing quality assurance and researchers.
-- Not suitable for non-CT images (e.g. PET or MRI), non-transverse or axial scans, different patient groups without prior local validation, or diagnostic applications.
+- Not suitable for non-CT images (e.g. PET or MRI), non-transverse or non-axial scans, different patient groups without prior local validation, or diagnostic applications.
 
 ## Ethical Considerations
 - No personal information was used, and all data were acquired from open-use data sources.
