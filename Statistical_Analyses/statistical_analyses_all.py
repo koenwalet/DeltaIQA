@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 from scipy.stats import kendalltau, spearmanr, pearsonr
 import pingouin as pingouin
+from Input.model_input_fuzzy_v2 import CTQualityDataset
 from Input.stacked_tiff import load_stacked_tiff
 from Model.model import AlexNet
 
@@ -367,4 +368,38 @@ if __name__ == "__main__":
 
     corr_df = correlation_coefficient_analyse.get_correlation_coefficient_dataframe()       
     #print(corr_df)
+
+#%%
+if __name__ == "__main__":
+    model = AlexNet()
+    model.load_weights("C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Code/AlexNet_v15_fuzzylabels_b128_LR1e-5_WD1e-3.weights.h5")
     
+    score_categories  = ['Poor: 0', 'Fair: 1', 'Good: 2', 'Very Good: 3', 'Excellent: 4']
+    labels_scores = [0, 1, 2, 3, 4]
+    
+    val_data_dir = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/Cranial/images/"
+    val_labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/Cranial/val_cranial_cia.json"
+    
+    dataset = CTQualityDataset(data_dir=val_data_dir, labels_file=val_labels_file)
+    val_images, val_labels = dataset.load_entire_dataset()
+
+    rad_scores = np.argmax(val_labels, axis=1)
+    mod_scores = np.argmax(model.predict(val_images, batch_size=128), axis=1)
+    
+    # Confusion Matrix, Accuracy, Precision and Recall
+    stat_cm_acc_prec_rec = Statistical_analysis_confusion_matrix_accuracy_precision_recall()
+
+    results_cm_acc_prec_rec = stat_cm_acc_prec_rec.evaluate_all(rad_scores, mod_scores)     
+
+    cm_df = stat_cm_acc_prec_rec.get_confusion_matrix_dataframe()      
+
+    summary_cm_acc_prec_rec_df = stat_cm_acc_prec_rec.get_summary_dataframe()      
+    #print(summary_cm_acc_prec_rec_df)
+
+    # Correlation Coefficients: SROCC, KROCC, PLCC and Overall 
+    correlation_coefficient_analyse = Statistical_analysis_SROCC_KROCC_PLCC()       
+
+    results_correlation_coefficients = correlation_coefficient_analyse.analyse_all_correlation_coefficients(rad_scores, mod_scores)    
+
+    corr_df = correlation_coefficient_analyse.get_correlation_coefficient_dataframe()       
+    #print(corr_df)
