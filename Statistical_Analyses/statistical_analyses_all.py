@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 from scipy.stats import kendalltau, spearmanr, pearsonr
 import pingouin as pingouin
-from Input.model_input_fuzzy_v2 import CTQualityDataset
+from Input.model_input_fuzzy import CTQualityDataset
 from Input.stacked_tiff import load_stacked_tiff
 from Model.model import AlexNet
 
