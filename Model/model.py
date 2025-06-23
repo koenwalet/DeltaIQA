@@ -6,7 +6,7 @@ import numpy as np
 from Input.model_input_fuzzy import CTQualityDataset
 from matplotlib import pyplot as plt
 import pickle
-from Data_Augmentation.data_augmentation import DataAugmentatie
+from Data_Augmentation.data_augmentation import DataAugmentation
 
 # %% Class definition
 
@@ -86,9 +86,9 @@ if __name__ == "__main__":
     translation_range = 10
     num_augmentations = 1
 
-    augmenteren = DataAugmentatie(rotation_range, translation_range)
+    augment = DataAugmentation(rotation_range, translation_range)
 
-    train_images_aug, train_labels_aug = augmenteren.augment_dataset(train_images, train_labels, num_augmentations)
+    train_images_aug, train_labels_aug = augment.augment_dataset(train_images, train_labels, num_augmentations)
     model = AlexNet()
 
     callbacks = [
