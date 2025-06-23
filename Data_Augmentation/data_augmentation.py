@@ -127,10 +127,10 @@ class DataAugmentation:
 #%%
 if __name__ == "__main__":
 
-    data_path = "C:/Users/Joey/Downloads/LDCTIQAG2023_train/LDCTIQAG2023_train/image"
-    labels_file = "C:/Users/Joey/Downloads/LDCTIQAG2023_train/LDCTIQAG2023_train/train.json"
+    data_dir = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAG2023_train/LDCTIQAG2023_train/image"
+    labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAG2023_train/LDCTIQAG2023_train/train.json"
 
-    dataset = CTQualityDataset(data_path, labels_file)
+    dataset = CTQualityDataset(data_dir, labels_file)
 
     images, labels = dataset.load_entire_dataset()
 
