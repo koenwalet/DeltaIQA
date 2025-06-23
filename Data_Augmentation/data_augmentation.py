@@ -126,7 +126,6 @@ class DataAugmentation:
 
 #%%
 if __name__ == "__main__":
-
     data_dir = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAG2023_train/LDCTIQAG2023_train/image"
     labels_file = "C:/Users/lars/OneDrive - Delft University of Technology/Jaargang 3/KTO/Model/Data/LDCTIQAG2023_train/LDCTIQAG2023_train/train.json"
 
