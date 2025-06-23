@@ -329,98 +329,6 @@ class Statistical_analysis_SROCC_KROCC_PLCC:
         
         return pd.DataFrame(data)
 
-#%% Weighted Cohen's Kappa
-class weighted_cohens_kappa:
-    """Statistical analysis: Cohen's Kappa"""
-    
-    def __init__(self, score_categories=None, labels_scores=None):
-        self.score_categories = score_categories or ['Poor: 0', 'Fair: 1', 'Good: 2', 'Very Good: 3', 'Excellent: 4']
-        self.labels_scores = labels_scores or [0, 1, 2, 3, 4]
-        self.results = {}
-
-    def calculate_weighted_cohens_kappa(self, rad_scores, mod_scores, weights='quadratic'):
-        """Calculates weighted Cohen's Kappa"""
-        
-        kappa_score = cohen_kappa_score(rad_scores, mod_scores, weights=weights)
-
-        kappa_results = {
-            'weighted_kappa': kappa_score,
-            'weights_type': weights,
-            'interpretation': self.interpret_kappa(kappa_score)                    
-        }
-
-        self.results = kappa_results
-        return kappa_results
-    
-    def interpret_kappa(self, kappa_value):
-        """Interpretation according to the Landis & Koch guidelines"""
-
-        if kappa_value < 0: 
-            return "Worse than coincidental findings ==> None"
-        elif kappa_value <= 0.20:
-            return "Minimal agreement ==> Slight"
-        elif kappa_value <= 0.40:
-            return "Reasonable agreement ==> Fair"
-        elif kappa_value <= 0.60:
-            return "Moderate agreement ==> Moderate"
-        elif kappa_value <= 0.80:
-            return "Substantial agreement ==> Substantial"
-        else:
-            return "Almost perfect agreement ==> Almost Perfect"
-
-    def analyse_weighted_cohens_kappa(self, rad_scores, mod_scores, rater1_name="Radiologists", rater2_name="Model"):
-        """Analysis of Weighted Cohen's Kappa"""
-        
-        print("\n=== Weighted Cohen's Kappa Analyse ===")
-        print(f"Comparison between {rater1_name} and {rater2_name}")
-        print()
-
-        kappa_results = self.calculate_weighted_cohens_kappa(rad_scores, mod_scores, weights='quadratic')
-
-        print(f"Weights Type: {kappa_results['weights_type']}")
-        print(f"Weighted Kappa Value: {kappa_results['weighted_kappa']:.4f}")
-        print(f"Interpretatie: {kappa_results['interpretation']}")
-        print()
-
-        return kappa_results
-    
-    def create_disagreement_matrix(self, rad_scores, mod_scores):
-        """Create a disagreement matrix"""
-        
-        cm = confusion_matrix(rad_scores, mod_scores, labels=self.labels_scores)
-
-        disagreement_df = pd.DataFrame(
-            cm,
-            index=[f'Radioloog: {cat}' for cat in self.score_categories],
-            columns=[f'Model: {cat}' for cat in self.score_categories]
-        )
-
-        return disagreement_df
-
-    def calculate_kappa_confidence_interval(self, rad_scores, mod_scores, weights='quadratic', confidence=0.95):
-        """Calculates a Cohen's Kappa Confidence Interval"""
-        
-        kappa_score = cohen_kappa_score(rad_scores, mod_scores, weights=weights)
-        n = len(rad_scores)
-
-        se_approx = np.sqrt(1 / n)  
-        alpha = 1 - confidence
-        z_score = 1.96 if confidence == 0.95 else 2.576 if confidence == 0.99 else 1.645
-
-        margin_error = z_score * se_approx
-
-        ci_results = {
-            'kappa': kappa_score,
-            'confidence_interval': confidence,
-            'lower_bound': kappa_score - margin_error,
-            'upper_bound': kappa_score + margin_error,
-            'margin_error': margin_error,
-            'note': "This is a rough estimation"
-        }
-
-        return ci_results
-    
-
 #%%
 if __name__ == "__main__":
     model = AlexNet()
@@ -459,16 +367,4 @@ if __name__ == "__main__":
 
     corr_df = correlation_coefficient_analyse.get_correlation_coefficient_dataframe()       
     #print(corr_df)
-
-    # Weighted Cohen's Kappa 
-    weighted_cohens_kappa_analyse = weighted_cohens_kappa()
-
-    results_weighted_kappa = weighted_cohens_kappa_analyse.analyse_weighted_cohens_kappa(rad_scores, mod_scores, rater1_name="Radiologists", rater2_name="Model")
-
-    disagreement_matrix = weighted_cohens_kappa_analyse.create_disagreement_matrix(rad_scores, mod_scores)
-    # print(disagreement_matrix)
-
-    # Confidence interval
-    ci_results = weighted_cohens_kappa_analyse.calculate_kappa_confidence_interval(rad_scores, mod_scores)
-    #print(ci_results)
     
